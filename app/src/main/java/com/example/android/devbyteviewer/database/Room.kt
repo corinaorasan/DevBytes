@@ -17,6 +17,7 @@
 
 package com.example.android.devbyteviewer.database
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
@@ -36,3 +37,4 @@ abstract class VideosDatabase : RoomDatabase() {
     abstract val videoDao: VideoDao
 }
 
+fun getDatabase(context: Context) = INSTANCE
