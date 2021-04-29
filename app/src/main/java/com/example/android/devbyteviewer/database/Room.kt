@@ -37,4 +37,14 @@ abstract class VideosDatabase : RoomDatabase() {
     abstract val videoDao: VideoDao
 }
 
-fun getDatabase(context: Context) = INSTANCE
+
+fun getDatabase(context: Context) {
+    synchronized(VideosDatabase::class.java) {
+        if (!::INSTANCE.isInitialized) {
+            INSTANCE = Room.databaseBuilder(
+                    context.applicationContext,
+                    VideosDatabase::class.java,
+                    "videos").build()
+        }
+    }
+}
